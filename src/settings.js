@@ -157,11 +157,11 @@ contentable.style.display = "flex";
 contentable.style.justifyContent = "center";
 contentable.style.alignItems = "flex-start";
 
-// MISC SETTINGS
-const miscContainer = newLectioContainer("Miscellaneous");
+// DIVERSE INDSTILLINGER
+const miscContainer = newLectioContainer("Diverse");
 
-// Hide profile picture
-const no_pp = newSettingsItem("settings-lectio-no-pp", "checkbox", "Hide profile picture");
+// Skjul profilbillede
+const no_pp = newSettingsItem("settings-lectio-no-pp", "checkbox", "Skjul profilbillede");
 
 no_pp.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-no-pp", no_pp.input.checked);
@@ -192,10 +192,10 @@ miscContainer.contentContainer.appendChild(no_pp.span);
 //   miscContainer.contentContainer.appendChild(schoolid.span);
 // }
 
-const autoRedirect = newLectioContainer("Auto redirect", false, "settings-lectio-auto-redirect");
+const autoRedirect = newLectioContainer("Automatisk omdirigering", false, "settings-lectio-auto-redirect");
 
 if (localStorage.getItem("settings-lectio-auto-redirect") === "true") {
-  const schoolid = newSettingsItem("settings-lectio-school-id", "text", "School ID");
+  const schoolid = newSettingsItem("settings-lectio-school-id", "text", "Skole-ID");
 
   schoolid.input.addEventListener('change', function() {
     localStorage.setItem("settings-lectio-school-id", schoolid.input.value);
@@ -206,14 +206,14 @@ if (localStorage.getItem("settings-lectio-auto-redirect") === "true") {
 
 miscContainer.contentContainer.appendChild(autoRedirect.section);
 
-// Custom names
-const lectureNameContainer = newLectioContainer("Custom names", false, "settings-lectio-custom-names");
+// Brugerdefinerede navne
+const lectureNameContainer = newLectioContainer("Brugerdefinerede navne", false, "settings-lectio-custom-names");
 
 if (localStorage.getItem("settings-lectio-custom-names") === "true") {
   const lectureNames = JSON.parse(localStorage.getItem("settings-lectio-faglist")) || [];
 
   for (let lecture of lectureNames) {
-    const lectureName = newSettingsItem(`settings-lectio-fagname-${lecture}`, "text-button", lecture, "Delete");
+    const lectureName = newSettingsItem(`settings-lectio-fagname-${lecture}`, "text-button", lecture, "Slet");
 
     lectureName.input.children[1].addEventListener('click', function() {
       const newLectureNames = lectureNames.filter((name) => name !== lecture);
@@ -233,7 +233,7 @@ if (localStorage.getItem("settings-lectio-custom-names") === "true") {
 
   lectureNameContainer.contentContainer.appendChild(document.createElement("br"));
 
-  const addLecture = newSettingsItem("settings-lectio-fagname-add", "text-button", "Add lecture", "Add");
+  const addLecture = newSettingsItem("settings-lectio-fagname-add", "text-button", "Tilføj fag", "Tilføj");
 
   addLecture.input.children[1].addEventListener('click', function() {
     const lectureName = addLecture.input.children[0].value;
@@ -251,10 +251,10 @@ miscContainer.contentContainer.appendChild(lectureNameContainer.section);
 lsContentContainer.appendChild(miscContainer.section);
 
 // ASSIGNMENT SETTINGS
-const assignmentsContainer = newLectioContainer("Assignments");
+const assignmentsContainer = newLectioContainer("Opgaver");
 
-// Assignment timer
-const assignmentTimer = newSettingsItem("settings-lectio-assignment-timer", "checkbox", "Assignment timer");
+// Opgavetimer
+const assignmentTimer = newSettingsItem("settings-lectio-assignment-timer", "checkbox", "Opgavetimer");
 
 assignmentTimer.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-assignment-timer", assignmentTimer.input.checked);
@@ -263,13 +263,13 @@ assignmentTimer.input.addEventListener('change', function() {
 assignmentsContainer.contentContainer.appendChild(assignmentTimer.span);
 
 // Assignment timer colors
-const assignmentTimerColors = newLectioContainer("Assignment timer colors", false, "settings-lectio-assignment-timer-colors-enable");
+const assignmentTimerColors = newLectioContainer("Farver til opgavetimer", false, "settings-lectio-assignment-timer-colors-enable");
 
 if (localStorage.getItem("settings-lectio-assignment-timer-colors-enable") === "true") {
-  const textColor = newSettingsItem("settings-lectio-assignment-timer-textColor", "color", "Text color");
-  const red = newSettingsItem("settings-lectio-assignment-timer-colors-red", "color", "Red");
-  const yellow = newSettingsItem("settings-lectio-assignment-timer-colors-yellow", "color", "Yellow");
-  const green = newSettingsItem("settings-lectio-assignment-timer-colors-green", "color", "Green");
+  const textColor = newSettingsItem("settings-lectio-assignment-timer-textColor", "color", "Tekstfarve");
+  const red = newSettingsItem("settings-lectio-assignment-timer-colors-red", "color", "Rød");
+  const yellow = newSettingsItem("settings-lectio-assignment-timer-colors-yellow", "color", "Gul");
+  const green = newSettingsItem("settings-lectio-assignment-timer-colors-green", "color", "Grøn");
   
   textColor.input.addEventListener('change', function() {
     localStorage.setItem("settings-lectio-assignment-timer-textColor", textColor.input.value);
@@ -295,8 +295,8 @@ if (localStorage.getItem("settings-lectio-assignment-timer-colors-enable") === "
 
 assignmentsContainer.contentContainer.appendChild(assignmentTimerColors.section);
 
-// Reverse assignments order
-const reverseAssignments = newSettingsItem("settings-lectio-reverse-assignments", "checkbox", "Reverse assignments order");
+// Vend rækkefølge af opgaver
+const reverseAssignments = newSettingsItem("settings-lectio-reverse-assignments", "checkbox", "Vend rækkefølge af opgaver");
 
 reverseAssignments.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-reverse-assignments", reverseAssignments.input.checked);
@@ -304,12 +304,12 @@ reverseAssignments.input.addEventListener('change', function() {
 
 assignmentsContainer.contentContainer.appendChild(reverseAssignments.span);
 
-// Default filters
-const defaultFiltersContainer = newLectioContainer("Default filters", true);
+// Standard filtre
+const defaultFiltersContainer = newLectioContainer("Standard filtre", true);
 
 const assignmentFilterLabels = {
-  hideDelivered: "Hide delivered",
-  showAnswered: "Show answered"
+  hideDelivered: "Skjul afleveret opgaver",
+  showAnswered: "Skjul manglende opgaver"
 };
 
 for (let filter of JSON.parse(localStorage.getItem("settings-lectio-assignment-filters"))) {
@@ -326,11 +326,11 @@ assignmentsContainer.contentContainer.appendChild(defaultFiltersContainer.sectio
 
 lsContentContainer.appendChild(assignmentsContainer.section);
 
-// UI SETTINGS
-const uiContainer = newLectioContainer("UI");
+// BRUGERFLADE
+const uiContainer = newLectioContainer("Brugerflade");
 
-// Hide title
-const hideTitle = newSettingsItem("settings-lectio-hide-title", "checkbox", "Hide title");
+// Skjul titel
+const hideTitle = newSettingsItem("settings-lectio-hide-title", "checkbox", "Skjul titel");
 
 hideTitle.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-hide-title", hideTitle.input.checked);
@@ -340,7 +340,7 @@ hideTitle.input.addEventListener('change', function() {
 
 uiContainer.contentContainer.appendChild(hideTitle.span);
 
-const singleBar = newSettingsItem("settings-lectio-single-bar", "checkbox", "Single bar");
+const singleBar = newSettingsItem("settings-lectio-single-bar", "checkbox", "Enkelt bjælke");
 
 singleBar.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-single-bar", singleBar.input.checked);
@@ -350,7 +350,7 @@ singleBar.input.addEventListener('change', function() {
 
 uiContainer.contentContainer.appendChild(singleBar.span);
 
-const hideTopbar = newSettingsItem("settings-lectio-hide-topbar", "checkbox", "Hide topbar");
+const hideTopbar = newSettingsItem("settings-lectio-hide-topbar", "checkbox", "Skjul topbar");
 
 hideTopbar.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-hide-topbar", hideTopbar.input.checked);
@@ -360,7 +360,7 @@ hideTopbar.input.addEventListener('change', function() {
 
 uiContainer.contentContainer.appendChild(hideTopbar.span);
 
-const centerTopbar = newSettingsItem("settings-lectio-center-topbar", "checkbox", "Center Lectio");
+const centerTopbar = newSettingsItem("settings-lectio-center-topbar", "checkbox", "Centrér Lectio");
 
 centerTopbar.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-center-topbar", centerTopbar.input.checked);
@@ -370,8 +370,8 @@ centerTopbar.input.addEventListener('change', function() {
 
 uiContainer.contentContainer.appendChild(centerTopbar.span);
 
-// Remove footer
-const removeFooter = newSettingsItem("settings-lectio-remove-footer", "checkbox", "Remove footer");
+// Fjern sidefod
+const removeFooter = newSettingsItem("settings-lectio-remove-footer", "checkbox", "Fjern sidefod");
 
 removeFooter.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-remove-footer", removeFooter.input.checked);
@@ -383,11 +383,11 @@ uiContainer.contentContainer.appendChild(removeFooter.span);
 
 lsContentContainer.appendChild(uiContainer.section);
 
-// Schedule container
-const scheduleContainer = newLectioContainer("Schedule container", true);
+// Skema
+const scheduleContainer = newLectioContainer("Skema", true);
 
-// Wide schedule
-const wide = newSettingsItem("settings-lectio-wide", "checkbox", "Wide schedule");
+// Bredt skema
+const wide = newSettingsItem("settings-lectio-wide", "checkbox", "Bredt skema");
 
 wide.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-wide", wide.input.checked);
@@ -395,8 +395,8 @@ wide.input.addEventListener('change', function() {
 
 scheduleContainer.contentContainer.appendChild(wide.span);
 
-// Border cancel schedule
-const canceledBorder = newSettingsItem("settings-lectio-schedule-canceled-borders", "checkbox", "Canceled borders");
+// Marker aflyste lektioner
+const canceledBorder = newSettingsItem("settings-lectio-schedule-canceled-borders", "checkbox", "Marker aflyste lektioner");
 
 canceledBorder.input.addEventListener('change', function() {
   localStorage.setItem("settings-lectio-schedule-canceled-borders", canceledBorder.input.checked);
@@ -406,11 +406,11 @@ canceledBorder.input.addEventListener('change', function() {
 
 scheduleContainer.contentContainer.appendChild(canceledBorder.span);
 
-// Custom schedule colors
-const colorContainer = newLectioContainer("Custom schedule colors", false, "settings-lectio-schedule-colors-enable");
+// Tilpassede skemafarver
+const colorContainer = newLectioContainer("Tilpassede skemafarver", false, "settings-lectio-schedule-colors-enable");
 
 if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
-  const fillRest = newSettingsItem("settings-lectio-schedule-colors-fill", "checkbox", "Fill rest with random colors");
+  const fillRest = newSettingsItem("settings-lectio-schedule-colors-fill", "checkbox", "Fyld resten med tilfældige farver");
 
   fillRest.input.addEventListener('change', function() {
     localStorage.setItem("settings-lectio-schedule-colors-fill", fillRest.input.checked);
@@ -431,7 +431,7 @@ if (localStorage.getItem("settings-lectio-schedule-colors-enable") === "true") {
 
   }
 
-  const resetColors = newSettingsItem("settings-lectio-reset-colors", "button", "Reset colors");
+  const resetColors = newSettingsItem("settings-lectio-reset-colors", "button", "Nulstil farver");
 
   resetColors.input.addEventListener('click', function() {
     for (let fag of fagList) {

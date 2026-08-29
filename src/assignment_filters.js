@@ -3,10 +3,10 @@ const assignmentContainer = document.getElementById("printStudentAssignmentsArea
 if (assignmentContainer) {
   const assignmentsMenuBar = assignmentContainer.querySelector(".ls-std-rowblock").children;
 
-  const deliveredToggleField = createAssignmentField("Afleveret", "hideDelivered", "Hide delivered", true);
+  const deliveredToggleField = createAssignmentField("Afleveret", "hideDelivered", "Skjul afleveret opgaver", true);
   assignmentsMenuBar[0].append(deliveredToggleField);
 
-  const missingToggleField = createAssignmentField("Mangler", "showAnswered", "Show answered", false);
+  const missingToggleField = createAssignmentField("Mangler", "showAnswered", "Skjul manglende opgaver", false);
   assignmentsMenuBar[0].append(missingToggleField);
 }
 

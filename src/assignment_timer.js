@@ -3,13 +3,13 @@ function update_time(assignmentDate, row, dateStr) {
   const timeDiff = assignmentDate - now;
   row.cells[3].style.color = localStorage.getItem('settings-lectio-assignment-timer-textColor')
   if (timeDiff > 0 && row.cells[5].innerText === "Afleveret") {
-    row.cells[3].innerText = `${dateStr}\n(Completed)`;
+    row.cells[3].innerText = `${dateStr}\n(Afsluttet)`;
   } else if (timeDiff > 0) {
     const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
     const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-    row.cells[3].innerText = `${dateStr}\n(${days}d ${hours}h ${minutes}m)`;
+    row.cells[3].innerText = `${dateStr}\n(${days}d ${hours}t ${minutes}m)`;
     
     if (localStorage.getItem('settings-lectio-assignment-timer-colors-enable') === "true") {
       if (days < 1) {
@@ -21,7 +21,7 @@ function update_time(assignmentDate, row, dateStr) {
       }
     }
   } else {
-    row.cells[3].innerText = `${dateStr}\n(Expired)`;
+    row.cells[3].innerText = `${dateStr}\n(Udløbet)`;
   }
 }
 
